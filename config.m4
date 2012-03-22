@@ -1,43 +1,43 @@
 
-PHP_ARG_ENABLE(asn1, whether to enable asn.1 support,
-[  --with-asn1=[DIR]           Enable asn.1 support])
+PHP_ARG_ENABLE(shout, whether to enable shout support,
+[  --with-shout=[DIR]           Enable shout support])
 
-if test "$PHP_ASN1" != "no"; then
+if test "$PHP_SHOUT" != "no"; then
   SEARCH_PATH="/usr/local /usr"
-  SEARCH_FOR="/include/libtasn1.h"
-  if test -r $PHP_ASN1/$SEARCH_FOR; then # path given as parameter
-    ASN1_DIR=$PHP_ASN1
+  SEARCH_FOR="/include/shout/shout.h"
+  if test -r $PHP_SHOUT/$SEARCH_FOR; then # path given as parameter
+    SHOUT_DIR=$PHP_SHOUT
   else
-    AC_MSG_CHECKING([for libtasn1 files in default path])
+    AC_MSG_CHECKING([for libshout files in default path])
     for i in $SEARCH_PATH ; do
       if test -r $i/$SEARCH_FOR; then
-        ASN1_DIR=$i
+        SHOUT_DIR=$i
         AC_MSG_RESULT(found in $i)
       fi
     done
   fi
 
-  if test -z "$ASN1_DIR"; then
+  if test -z "$SHOUT_DIR"; then
     AC_MSG_RESULT([not found])
-    AC_MSG_ERROR([The required libtasn1 library was not found.  You can obtain that package from http://www.gnu.org/software/libtasn1/])
+    AC_MSG_ERROR([The required libshout library was not found.  You can obtain that package from http://www.icecast.org/])
   fi
 
-  PHP_ADD_INCLUDE($ASN1_DIR/include)
+  PHP_ADD_INCLUDE($SHOUT_DIR/include)
 
-  LIBNAME=tasn1
-  LIBSYMBOL=asn1_parser2tree
+  LIBNAME=shout
+  LIBSYMBOL=shout_init
 
   PHP_CHECK_LIBRARY($LIBNAME,$LIBSYMBOL,
   [
-    PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $ASN1_DIR/lib, ASN1_SHARED_LIBADD)
-    AC_DEFINE(HAVE_ASN1LIB,1,[Have libasn1])
+    PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $SHOUT_DIR/lib, SHOUT_SHARED_LIBADD)
+    AC_DEFINE(HAVE_SHOUTLIB,1,[Have libshout])
   ],[
-    AC_MSG_ERROR([libasn1 not found])
+    AC_MSG_ERROR([libshout not found])
   ],[
-    -L$ASN1_DIR/lib
+    -L$SHOUT_DIR/lib
   ])
 
-  PHP_SUBST(ASN1_SHARED_LIBADD)
+  PHP_SUBST(SHOUT_SHARED_LIBADD)
 
-  PHP_NEW_EXTENSION(asn1, asn1.c , $ext_shared)
+  PHP_NEW_EXTENSION(shout, shout.c , $ext_shared)
 fi

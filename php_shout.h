@@ -16,14 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-#ifndef PHP_ASN1_H_
-#define PHP_ASN1_H_
+#ifndef PHP_SHOUT_H_
+#define PHP_SHOUT_H_
 
 #include "php.h"
 
-#define PHP_ASN1_VERSION "0.0.1"
+#define PHP_SHOUT_VERSION "0.0.1"
 
-#endif /* PHP_ASN1_H_ */
+#endif /* PHP_SHOUT_H_ */
 
 /*
  * Local variables:

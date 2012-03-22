@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
- <name>asn1</name>
+ <name>shout3</name>
  <channel>pecl.php.net</channel>
- <summary>A asn.1/der encoder / decoder extension</summary>
- <description>Provides a set of classes and functions for encoding and decoding ASN.1 / DER structures.</description>
+ <summary>A shout3 extension</summary>
+ <description>Provides a set of classes and functions for connectivity to a shout/icecast server.</description>
  <lead>
   <name>Joshua Thijssen</name>
   <user>jaytaph</user>
   <email>jthijssen@noxlogic.nl</email>
   <active>yes</active>
  </lead>
- <date>2012-03-11</date>
- <time>11:50:30</time>
+ <date>2012-03-22</date>
+ <time>21:18:30</time>
  <version>
   <release>0.0.1</release>
   <api>0.0.1</api>
@@ -39,8 +39,8 @@
    </pearinstaller>
   </required>
  </dependencies>
- <providesextension>asn1</providesextension>
+ <providesextension>shout3</providesextension>
  <extsrcrelease>
-  <configureoption default="autodetect" name="with-asn1" prompt="libtasn1 prefix?" />
+  <configureoption default="autodetect" name="with-shout3" prompt="libshout3 prefix?" />
  </extsrcrelease>
 </package>
