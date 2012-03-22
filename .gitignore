@@ -1,0 +1,4 @@
+nbproject/*
+test.mk
+catalog.xml
+/.libs/
