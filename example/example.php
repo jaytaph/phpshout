@@ -7,7 +7,7 @@
 $shout = new Shout();
 $shout->set_protocol(shout::PROTOCOL_HTTP);
 $shout->set_host("localhost");
-$shout->set_port("8234");
+$shout->set_port("8000");
 $shout->set_mount("/listen.m3u");
 $shout->set_user("source");
 $shout->set_password("secret");
