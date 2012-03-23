@@ -471,7 +471,7 @@ PHP_METHOD(shout, delay) {
  * Returns the value for the key in the audio info dictionary */
 PHP_METHOD(shout, get_audio_info) {
         php_shout_obj *intern;
-        unsigned char *key = NULL;
+        char *key = NULL;
         long key_len = 0;
 
         if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &key, &key_len) == FAILURE) {
@@ -479,7 +479,7 @@ PHP_METHOD(shout, get_audio_info) {
         }
 
         intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
-        char *val = shout_get_audio_info(intern->shout, key);
+        const char *val = shout_get_audio_info(intern->shout, key);
         RETURN_STRING(val, 1);
 }
 /* }}} */
