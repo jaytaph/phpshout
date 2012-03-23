@@ -467,6 +467,60 @@ PHP_METHOD(shout, delay) {
 }
 /* }}} */
 
+/* {{{ proto string shout::get_audio_info(string)
+ * Returns the value for the key in the audio info dictionary */
+PHP_METHOD(shout, get_audio_info) {
+        php_shout_obj *intern;
+        unsigned char *key = NULL;
+        long key_len = 0;
+
+        if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &key, &key_len) == FAILURE) {
+                RETURN_FALSE
+        }
+
+        intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
+        char *val = shout_get_audio_info(intern->shout, key);
+        RETURN_STRING(val, 1);
+}
+/* }}} */
+
+/* {{{ proto long shout::set_audio_info(string, string)
+ * Set the value for the key in the audio info dictionary. Returns status */
+PHP_METHOD(shout, set_audio_info) {
+        php_shout_obj *intern;
+        unsigned char *key = NULL;
+        unsigned char *val = NULL;
+        long key_len = 0;
+        long val_len = 0;
+
+        if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &key, &key_len, &val, &val_len) == FAILURE) {
+                RETURN_FALSE
+        }
+
+        intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
+        int ret = shout_set_audio_info(intern->shout, key, val);
+        RETURN_LONG(ret);
+}
+/* }}} */
+
+
+
+/* {{{ proto long shout::get_queue_length()
+ * Returns the value of the write queue */
+PHP_METHOD(shout, get_queue_length) {
+        php_shout_obj *intern;
+
+        if (zend_parse_parameters_none() == FAILURE) {
+                RETURN_FALSE
+        }
+
+        intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
+        int len = shout_queuelen(intern->shout);
+        RETURN_LONG(len);
+}
+/* }}} */
+
+
 
 /* {{{ */
 static void shout_object_free(void *object TSRMLS_DC) {
@@ -520,6 +574,7 @@ static zend_function_entry shout_funcs[] = {
         PHP_ME(shout, send,             NULL, ZEND_ACC_PUBLIC)
         PHP_ME(shout, sync,             NULL, ZEND_ACC_PUBLIC)
         PHP_ME(shout, delay,            NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_queue_length, NULL, ZEND_ACC_PUBLIC)
 
         PHP_ME(shout, get_host,         NULL, ZEND_ACC_PUBLIC)
         PHP_ME(shout, set_host,         NULL, ZEND_ACC_PUBLIC)
@@ -551,6 +606,9 @@ static zend_function_entry shout_funcs[] = {
         PHP_ME(shout, set_format,       NULL, ZEND_ACC_PUBLIC)
         PHP_ME(shout, get_nonblocking,  NULL, ZEND_ACC_PUBLIC)
         PHP_ME(shout, set_nonblocking,  NULL, ZEND_ACC_PUBLIC)
+
+        PHP_ME(shout, set_audio_info,  NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_audio_info,  NULL, ZEND_ACC_PUBLIC)
 
 	/* End of functions */
 	{NULL, NULL, NULL}
