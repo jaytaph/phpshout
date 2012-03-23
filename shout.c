@@ -91,6 +91,106 @@ PHP_METHOD(shout, __construct) {
 }
 /* }}} */
 
+
+static void php_shout_get_handler_string(INTERNAL_FUNCTION_PARAMETERS, const char *(*func)(shout_t *)) {
+        php_shout_obj *intern;
+
+        if (zend_parse_parameters_none() == FAILURE) {
+                RETURN_FALSE
+        }
+
+        intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
+        unsigned char *tmp = (*func)(intern->shout);
+        if (tmp == NULL) {
+                RETURN_NULL();
+        }
+        RETURN_STRING(tmp, 1);
+}
+static void php_shout_get_handler_long(INTERNAL_FUNCTION_PARAMETERS, unsigned int(*func)(shout_t *)) {
+        php_shout_obj *intern;
+
+        if (zend_parse_parameters_none() == FAILURE) {
+                RETURN_FALSE
+        }
+
+        intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
+        RETURN_LONG((*func)(intern->shout));
+}
+static void php_shout_get_handler_short(INTERNAL_FUNCTION_PARAMETERS, unsigned short(*func)(shout_t *)) {
+        php_shout_obj *intern;
+
+        if (zend_parse_parameters_none() == FAILURE) {
+                RETURN_FALSE
+        }
+
+        intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
+        RETURN_LONG((*func)(intern->shout));
+}
+
+static void php_shout_get_handler_bool(INTERNAL_FUNCTION_PARAMETERS, unsigned int(*func)(shout_t *)) {
+        php_shout_obj *intern;
+
+        if (zend_parse_parameters_none() == FAILURE) {
+                RETURN_FALSE
+        }
+
+        intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
+        if ((*func)(intern->shout)) {
+          RETURN_TRUE
+        } else {
+          RETURN_FALSE
+        }
+}
+
+
+
+PHP_METHOD(shout, get_port) {
+  php_shout_get_handler_short(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_port);
+}
+PHP_METHOD(shout, get_password) {
+  php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_password);
+}
+PHP_METHOD(shout, get_mount) {
+  php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_mount);
+}
+PHP_METHOD(shout, get_name) {
+  php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_name);
+}
+PHP_METHOD(shout, get_url) {
+  php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_url);
+}
+PHP_METHOD(shout, get_genre) {
+  php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_genre);
+}
+PHP_METHOD(shout, get_agent) {
+  php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_agent);
+}
+PHP_METHOD(shout, get_user) {
+  php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_user);
+}
+PHP_METHOD(shout, get_description) {
+  php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_description);
+}
+PHP_METHOD(shout, get_dumpfile) {
+  php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_dumpfile);
+}
+PHP_METHOD(shout, get_public) {
+  php_shout_get_handler_bool(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_public);
+}
+PHP_METHOD(shout, get_format) {
+  php_shout_get_handler_long(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_format);
+}
+PHP_METHOD(shout, get_protocol) {
+  php_shout_get_handler_long(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_protocol);
+}
+PHP_METHOD(shout, get_nonblocking) {
+  php_shout_get_handler_bool(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_nonblocking);
+}
+
+
+
+
+
 PHP_METHOD(shout, get_host) {
         php_shout_obj *intern;
 
@@ -164,6 +264,21 @@ static zend_function_entry shout_funcs[] = {
         PHP_ME(shout, get_host,         NULL, ZEND_ACC_PUBLIC)
         PHP_ME(shout, set_host,         NULL, ZEND_ACC_PUBLIC)
 
+        PHP_ME(shout, get_protocol,     NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_port,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_password,     NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_mount,        NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_name,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_url,          NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_genre,        NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_agent,        NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_user,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_description,  NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_dumpfile,     NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_public,       NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_format,       NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_nonblocking,  NULL, ZEND_ACC_PUBLIC)
+
                 /*
   // Main
   void shout_init();
@@ -184,34 +299,23 @@ static zend_function_entry shout_funcs[] = {
   int shout_set_host(	self, 	  host);
   const char *shout_get_host(self);
   int shout_set_port(self, port);
-  int shout_get_port(self);
   int shout_set_user(	self, 	  user);
   const char *shout_get_user(self);
   int shout_set_pass(	self, pass)
   const char *shout_get_pass(self);
   int shout_set_protocol(	self, proto)
-  int shout_get_protocol(self);
   int shout_set_format(	self, format)
-  int shout_get_format(self);
   int shout_set_mount(	self, 	 mount);
-  const char *shout_get_mount(self);
   int shout_set_dumpfile(	self, dumpfile);
-  const char *shout_get_dumpfile(	self);
   int shout_set_agent(	self, 	 agent);
-  const char *shout_get_agent(self);
 
   // directory
   int shout_set_public(	self, makepublic)
   int shout_get_public(self);
 
   int shout_set_name(	self, name);
-  const char *shout_get_name(self);
   int shout_set_url(	self, 	 url);
-  const char *shout_get_url(self)
-  int shout_set_genre(	self, 	 genre);
-  const char *shout_get_genre(self);
   int shout_set_description(	self, description)
-  const char *shout_get_description(	self);
   int shout_set_audio_info(	self, 	  name, 	  value);
   const char *shout_get_audio_info(	self, 	 name);
 
