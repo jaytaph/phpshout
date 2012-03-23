@@ -1,3 +1,5 @@
 Initial shout3 pecl extension.
 
 Please check the examples/ directory for more info on usage. Currently only tested with http/mp3 streams.
+
+More info on icecast streaming: http://www.icecast.org/
