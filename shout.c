@@ -37,6 +37,7 @@
 
 typedef struct _php_shout_obj {
 	zend_object zo;
+        shout_t *shout;
 } php_shout_obj;
 
 /* The class entry pointers */
@@ -75,18 +76,45 @@ PHP_METHOD(shout, __construct) {
 		return;
 	}
 
-	intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
-
-        // Initialize shout
-        shout_init();
-
 #if ZEND_MODULE_API_NO > 20060613
 	zend_restore_error_handling(&error_handling TSRMLS_CC);
 #else
 	php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 #endif
+
+        intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
+        intern->shout = shout_new();
+        if (intern->shout == NULL) {
+                zend_throw_exception(php_shout_exception_class_entry, "Could not initialize shout structure!", 0 TSRMLS_CC);
+                RETURN_FALSE
+        }
 }
 /* }}} */
+
+PHP_METHOD(shout, get_host) {
+        php_shout_obj *intern;
+
+        if (zend_parse_parameters_none() == FAILURE) {
+                RETURN_FALSE
+        }
+
+        intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
+        RETURN_STRING(shout_get_host(intern->shout), 1);
+}
+
+PHP_METHOD(shout, set_host) {
+        php_shout_obj *intern;
+        unsigned char *host = NULL;
+        long host_len = 0;
+
+        if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &host, &host_len) == FAILURE) {
+                RETURN_FALSE
+        }
+
+        intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
+        RETURN_LONG(shout_set_host(intern->shout, host));
+}
+
 
 
 /* {{{ */
@@ -94,6 +122,7 @@ static void shout_object_free(void *object TSRMLS_DC) {
 	php_shout_obj *intern = (php_shout_obj *)object;
 
         // Free any internal data
+        shout_free(intern->shout);
 
 	zend_object_std_dtor(&intern->zo TSRMLS_CC);
 	efree(object);
@@ -128,33 +157,19 @@ static zend_object_value shout_object_new(zend_class_entry *class_type TSRMLS_DC
 }
 /* }}} */
 
-/* {{{ */
-static zend_object_value shout_object_clone(zval *this_ptr TSRMLS_DC) {
-	php_shout_obj *new_obj = NULL;
-	php_shout_obj *old_obj = (php_shout_obj *)zend_object_store_get_object(this_ptr TSRMLS_CC);
-	zend_object_value        retval = shout_object_new_ex(old_obj->zo.ce, &new_obj TSRMLS_CC);
-
-	zend_objects_clone_members(&new_obj->zo, retval, &old_obj->zo, Z_OBJ_HANDLE_P(this_ptr) TSRMLS_CC);
-
-        // @TODO: Copy over internal data
-
-	return retval;
-}
-/* }}} */
-
-
 static zend_function_entry shout_funcs[] = {
         PHP_ME(shout, __construct,      NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
-        PHP_ME(shout, get_version,          NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, get_version,      NULL, ZEND_ACC_PUBLIC)
+
+        PHP_ME(shout, get_host,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, set_host,         NULL, ZEND_ACC_PUBLIC)
+
                 /*
   // Main
   void shout_init();
   void shout_shutdown();
-  const char *shout_version(	major, 	  minor, 	  patch);
 
   // Connection
-  shout_t *shout_new();
-  void shout_free(self);
   int shout_open(self);
   int shout_close(self);
   const char *shout_get_error(self);
@@ -230,7 +245,7 @@ PHP_MINIT_FUNCTION(shout)
 	 */
 	INIT_CLASS_ENTRY(ce, "shout", shout_funcs);
 	ce.create_object = shout_object_new;
-	shout_object_handlers.clone_obj = shout_object_clone;
+	shout_object_handlers.clone_obj = NULL; // We do not allow clone (for now)
 	//shout_object_handlers.read_property = shout_object_read_property;
 	php_shout_sc_entry = zend_register_internal_class(&ce TSRMLS_CC);
 
