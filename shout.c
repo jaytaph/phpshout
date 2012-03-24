@@ -504,6 +504,54 @@ PHP_METHOD(shout, set_audio_info) {
 /* }}} */
 
 
+/* {{{ proto long shout::set_metadata(array)
+ * Set the stream metadata. Returns status */
+PHP_METHOD(shout, set_metadata) {
+        php_shout_obj *intern;
+        zval *arr = NULL;
+        zval **current;
+        shout_metadata_t *meta;
+
+        if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a", &arr) == FAILURE) {
+                RETURN_FALSE
+        }
+
+        /* Initialize metadata structure */
+        meta = shout_metadata_new();
+
+        /* Iterate array and populate metadata structure */
+        for (zend_hash_internal_pointer_reset(HASH_OF(arr));
+             zend_hash_get_current_data(HASH_OF(arr), (void**) &current) == SUCCESS;
+             zend_hash_move_forward(HASH_OF(arr))) {
+
+             char  *str_key = NULL;
+             uint   str_key_len;
+             ulong  num_key;
+             char  *data_val;
+
+             /* separate current value and convert to string */
+             SEPARATE_ZVAL(current);
+             convert_to_string_ex(current);
+
+             /* Get key of current item, convert to string if needed */
+             zend_hash_get_current_key_ex(HASH_OF(arr), &str_key, &str_key_len, &num_key, 0, NULL);
+             if (!str_key) {
+                     spprintf(&str_key, 0, "%ld", num_key);
+                     str_key_len = strlen(str_key)+1;
+             }
+
+             /* add key => data to structure*/
+             shout_metadata_add(meta, str_key, Z_STRVAL_PP(current));
+        }
+
+        /* Send meta data*/
+        intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
+        int ret = shout_set_metadata(intern->shout, meta);
+        shout_metadata_free(meta);
+
+        RETURN_LONG(ret);
+}
+
 
 /* {{{ proto long shout::get_queue_length()
  * Returns the value of the write queue */
@@ -609,6 +657,7 @@ static zend_function_entry shout_funcs[] = {
 
         PHP_ME(shout, set_audio_info,  NULL, ZEND_ACC_PUBLIC)
         PHP_ME(shout, get_audio_info,  NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, set_metadata,    NULL, ZEND_ACC_PUBLIC)
 
 	/* End of functions */
 	{NULL, NULL, NULL}
