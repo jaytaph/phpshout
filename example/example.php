@@ -32,7 +32,7 @@ $shout->set_audio_info($shout::AI_CHANNELS, 2);
 
 // Open the stream
 if ($shout->open() != shout::ERR_SUCCESS) {
-  die ("Cannot open stream to server");
+  die ("Cannot open stream to server: ".$shout->get_error()."\n");
 }
 
 // Open MP3 file to stream
