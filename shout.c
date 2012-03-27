@@ -61,28 +61,10 @@ PHP_METHOD(shout, get_version) {
  * Constructs a new shout object. */
 PHP_METHOD(shout, __construct) {
 	php_shout_obj *intern;
-#if ZEND_MODULE_API_NO > 20060613
-	zend_error_handling error_handling;
-
-	zend_replace_error_handling(EH_THROW, php_shout_exception_class_entry, &error_handling TSRMLS_CC);
-#else
-	php_set_error_handling(EH_THROW, php_shout_exception_class_entry TSRMLS_CC);
-#endif
 
         if (zend_parse_parameters_none() == FAILURE) {
-#if ZEND_MODULE_API_NO > 20060613
-                zend_restore_error_handling(&error_handling TSRMLS_CC);
-#else
-                php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
-#endif
 		return;
 	}
-
-#if ZEND_MODULE_API_NO > 20060613
-	zend_restore_error_handling(&error_handling TSRMLS_CC);
-#else
-	php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
-#endif
 
         intern = (php_shout_obj *)zend_object_store_get_object(getThis() TSRMLS_CC);
         intern->shout = shout_new();
