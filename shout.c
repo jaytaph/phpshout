@@ -49,7 +49,7 @@ zend_class_entry *php_shout_sc_entry;
 /* The object handlers */
 static zend_object_handlers shout_object_handlers;
 
-PHP_METHOD(shout, get_version) {
+PHP_METHOD(shout, getVersion) {
         if (zend_parse_parameters_none() == FAILURE) {
                 RETURN_FALSE
         }
@@ -197,167 +197,169 @@ static void php_shout_set_handler_bool(INTERNAL_FUNCTION_PARAMETERS, int(*func)(
 
 /* Define the php getters and setters */
 
-/* {{{ proto long shout::__get_errno()
+/* {{{ proto long shout::__getErrno()
  * Returns error number */
-PHP_METHOD(shout, get_errno) { php_shout_get_handler_long(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_errno); }
+PHP_METHOD(shout, getErrno) { php_shout_get_handler_long(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_errno); }
 /* }}} */
 
-/* {{{ proto string shout::__get_error()
+/* {{{ proto string shout::__getError()
  * Returns error string */
-PHP_METHOD(shout, get_error) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_error); }
+PHP_METHOD(shout, getError) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_error); }
 /* }}} */
 
-/* {{{ proto long shout::get_host()
+/* {{{ proto long shout::getHost()
  * Returns the current set host */
-PHP_METHOD(shout, get_host) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_host); }
+PHP_METHOD(shout, getHost) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_host); }
 /* }}} */
 
-/* {{{ proto long shout::set_host(string)
+/* {{{ proto long shout::setHost(string)
  * Sets the host to connect. Returns status code */
-PHP_METHOD(shout, set_host) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_host); }
+PHP_METHOD(shout, setHost) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_host); }
 /* }}} */
 
-PHP_METHOD(shout, get_port) { php_shout_get_handler_short(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_port); }
+/* {{{ proto long shout::getPort()
+ * Returns the current set port */
+PHP_METHOD(shout, getPort) { php_shout_get_handler_short(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_port); }
 /* }}} */
 
-/* {{{ proto long shout::set_port(long)
+/* {{{ proto long shout::setPort(long)
  * Sets the port number to connect. Returns status code */
-PHP_METHOD(shout, set_port) { php_shout_set_handler_short(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_port); }
+PHP_METHOD(shout, setPort) { php_shout_set_handler_short(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_port); }
 /* }}} */
 
-/* {{{ proto string shout::get_password()
+/* {{{ proto string shout::getPassword()
  * Returns the current set password */
-PHP_METHOD(shout, get_password) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_password); }
+PHP_METHOD(shout, getPassword) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_password); }
 /* }}} */
 
-/* {{{ proto long shout::set_password(string)
+/* {{{ proto long shout::setPassword(string)
  * Sets the password to connect. Returns status code */
-PHP_METHOD(shout, set_password) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_password); }
+PHP_METHOD(shout, setPassword) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_password); }
 /* }}} */
 
-/* {{{ proto string shout::get_mount()
+/* {{{ proto string shout::getMount()
  * Returns the current set mount */
-PHP_METHOD(shout, get_mount) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_mount); }
+PHP_METHOD(shout, getMount) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_mount); }
 /* }}} */
 
-/* {{{ proto long shout::set_mount(string)
+/* {{{ proto long shout::setMount(string)
  * Sets the mount to connect to. Returns status code */
-PHP_METHOD(shout, set_mount) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_mount); }
+PHP_METHOD(shout, setMount) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_mount); }
 /* }}} */
 
-/* {{{ proto string shout::get_name()
+/* {{{ proto string shout::getName()
  * Returns the current set name */
-PHP_METHOD(shout, get_name) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_name); }
+PHP_METHOD(shout, getName) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_name); }
 /* }}} */
 
-/* {{{ proto long shout::set_name(string)
+/* {{{ proto long shout::setName(string)
  * Sets the name. Returns status code */
-PHP_METHOD(shout, set_name) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_name); }
+PHP_METHOD(shout, setName) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_name); }
 /* }}} */
 
-/* {{{ proto string shout::get_url()
+/* {{{ proto string shout::getUrl()
  * Returns the current set url */
-PHP_METHOD(shout, get_url) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_url); }
+PHP_METHOD(shout, getUrl) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_url); }
 /* }}} */
 
-/* {{{ proto long shout::set_url(string)
+/* {{{ proto long shout::setUrl(string)
  * Sets the url. Returns status code */
-PHP_METHOD(shout, set_url) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_url); }
+PHP_METHOD(shout, setUrl) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_url); }
 /* }}} */
 
-/* {{{ proto string shout::get_genre()
+/* {{{ proto string shout::getGenre()
  * Returns the current set genre */
-PHP_METHOD(shout, get_genre) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_genre); }
+PHP_METHOD(shout, getGenre) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_genre); }
 /* }}} */
 
-/* {{{ proto long shout::set_genre(string)
+/* {{{ proto long shout::setGenre(string)
  * Sets the genre. Returns status code */
-PHP_METHOD(shout, set_genre) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_genre); }
+PHP_METHOD(shout, setGenre) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_genre); }
 /* }}} */
 
-/* {{{ proto string shout::get_agent()
+/* {{{ proto string shout::getAgent()
  * Returns the current set agent */
-PHP_METHOD(shout, get_agent) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_agent); }
+PHP_METHOD(shout, getAgent) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_agent); }
 /* }}} */
 
-/* {{{ proto long shout::set_agent(string)
+/* {{{ proto long shout::setAgent(string)
  * Sets the agent. Returns status code */
-PHP_METHOD(shout, set_agent) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_agent); }
+PHP_METHOD(shout, setAgent) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_agent); }
 /* }}} */
 
-/* {{{ proto string shout::get_user()
+/* {{{ proto string shout::getUser()
  * Returns the current set user */
-PHP_METHOD(shout, get_user) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_user); }
+PHP_METHOD(shout, getUser) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_user); }
 /* }}} */
 
-/* {{{ proto long shout::set_user(string)
+/* {{{ proto long shout::setUser(string)
  * Sets the user. Returns status code */
-PHP_METHOD(shout, set_user) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_user); }
+PHP_METHOD(shout, setUser) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_user); }
 /* }}} */
 
-/* {{{ proto string shout::get_description()
+/* {{{ proto string shout::getDescription()
  * Returns the current set description */
-PHP_METHOD(shout, get_description) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_description); }
+PHP_METHOD(shout, getDescription) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_description); }
 /* }}} */
 
-/* {{{ proto long shout::set_description(string)
+/* {{{ proto long shout::setDescription(string)
  * Sets the description of the feed. Returns status code */
-PHP_METHOD(shout, set_description) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_description); }
+PHP_METHOD(shout, setDescription) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_description); }
 /* }}} */
 
-/* {{{ proto string shout::get_dumpfile()
+/* {{{ proto string shout::getDumpfile()
  * Returns the current set dumpfile */
-PHP_METHOD(shout, get_dumpfile) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_dumpfile); }
+PHP_METHOD(shout, getDumpfile) { php_shout_get_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_dumpfile); }
 /* }}} */
 
-/* {{{ proto long shout::set_dumpfile(string)
+/* {{{ proto long shout::setDumpfile(string)
  * Sets the dumpfile. Returns status code */
-PHP_METHOD(shout, set_dumpfile) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_dumpfile); }
+PHP_METHOD(shout, setDumpfile) { php_shout_set_handler_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_dumpfile); }
 /* }}} */
 
-/* {{{ proto bool shout::get_public()
+/* {{{ proto bool shout::getPublic()
  * Returns true when the stream is public, false otherwise */
-PHP_METHOD(shout, get_public) { php_shout_get_handler_bool(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_public); }
+PHP_METHOD(shout, getPublic) { php_shout_get_handler_bool(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_public); }
 /* }}} */
 
-/* {{{ proto long shout::set_public(bool)
+/* {{{ proto long shout::setPublic(bool)
  * Sets the stream to be public or not. Returns status code */
-PHP_METHOD(shout, set_public) { php_shout_set_handler_bool(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_public); }
+PHP_METHOD(shout, setPublic) { php_shout_set_handler_bool(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_public); }
 /* }}} */
 
-/* {{{ proto long shout::get_format()
+/* {{{ proto long shout::getFormat()
  * Returns the current set format */
-PHP_METHOD(shout, get_format) { php_shout_get_handler_ulong(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_format); }
+PHP_METHOD(shout, getFormat) { php_shout_get_handler_ulong(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_format); }
 /* }}} */
 
-/* {{{ proto long shout::set_format(long)
+/* {{{ proto long shout::setFormat(long)
  * Sets the format of the feed. Returns status code */
-PHP_METHOD(shout, set_format) { php_shout_set_handler_long(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_format); }
+PHP_METHOD(shout, setFormat) { php_shout_set_handler_long(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_format); }
 /* }}} */
 
-/* {{{ proto long shout::get_protocol()
+/* {{{ proto long shout::getProtocol()
  * Returns the current set protocol */
-PHP_METHOD(shout, get_protocol) { php_shout_get_handler_ulong(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_protocol); }
+PHP_METHOD(shout, getProtocol) { php_shout_get_handler_ulong(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_protocol); }
 /* }}} */
 
-/* {{{ proto long shout::set_protocol(long)
+/* {{{ proto long shout::setProtocol(long)
  * Sets the stream protocol. Returns status code */
-PHP_METHOD(shout, set_protocol) { php_shout_set_handler_long(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_protocol); }
+PHP_METHOD(shout, setProtocol) { php_shout_set_handler_long(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_protocol); }
 /* }}} */
 
-/* {{{ proto bool shout::get_format()
+/* {{{ proto bool shout::getNonblocking()
  * Returns true when the stream is nonblocking, false otherwise */
-PHP_METHOD(shout, get_nonblocking) { php_shout_get_handler_bool(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_nonblocking); }
+PHP_METHOD(shout, getNonblocking) { php_shout_get_handler_bool(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_get_nonblocking); }
 /* }}} */
 
-/* {{{ proto long shout::set_nonblocking(bool)
+/* {{{ proto long shout::setNonblocking(bool)
  * Sets the stream to be nonblock or not. Returns status code */
-PHP_METHOD(shout, set_nonblocking) { php_shout_set_handler_bool(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_nonblocking); }
+PHP_METHOD(shout, setNonblocking) { php_shout_set_handler_bool(INTERNAL_FUNCTION_PARAM_PASSTHRU, shout_set_nonblocking); }
 /* }}} */
 
-/* {{{ proto long shout::get_connected()
+/* {{{ proto long shout::getConnected()
  * Returns status code if the stream is connected or not*/
-PHP_METHOD(shout, get_connected) {
+PHP_METHOD(shout, getConnected) {
         php_shout_obj *intern;
 
         if (zend_parse_parameters_none() == FAILURE) {
@@ -401,7 +403,7 @@ PHP_METHOD(shout, close) {
 }
 /* }}} */
 
-/* {{{ proto shout::get_connected()
+/* {{{ proto shout::sync()
  * Syncs / delays until it's time to send new data to the server */
 PHP_METHOD(shout, sync) {
         php_shout_obj *intern;
@@ -449,9 +451,9 @@ PHP_METHOD(shout, delay) {
 }
 /* }}} */
 
-/* {{{ proto string shout::get_audio_info(string)
+/* {{{ proto string shout::getAudioInfo(string)
  * Returns the value for the key in the audio info dictionary */
-PHP_METHOD(shout, get_audio_info) {
+PHP_METHOD(shout, getAudioInfo) {
         php_shout_obj *intern;
         char *key = NULL;
         long key_len = 0;
@@ -466,9 +468,9 @@ PHP_METHOD(shout, get_audio_info) {
 }
 /* }}} */
 
-/* {{{ proto long shout::set_audio_info(string, string)
+/* {{{ proto long shout::setAudioInfo(string, string)
  * Set the value for the key in the audio info dictionary. Returns status */
-PHP_METHOD(shout, set_audio_info) {
+PHP_METHOD(shout, setAudioInfo) {
         php_shout_obj *intern;
         unsigned char *key = NULL;
         unsigned char *val = NULL;
@@ -486,9 +488,9 @@ PHP_METHOD(shout, set_audio_info) {
 /* }}} */
 
 
-/* {{{ proto long shout::set_metadata(array)
+/* {{{ proto long shout::setMetadata(array)
  * Set the stream metadata. Returns status */
-PHP_METHOD(shout, set_metadata) {
+PHP_METHOD(shout, setMetadata) {
         php_shout_obj *intern;
         zval *arr = NULL;
         zval **current;
@@ -535,9 +537,9 @@ PHP_METHOD(shout, set_metadata) {
 }
 
 
-/* {{{ proto long shout::get_queue_length()
+/* {{{ proto long shout::getQueueLength()
  * Returns the value of the write queue */
-PHP_METHOD(shout, get_queue_length) {
+PHP_METHOD(shout, getQueueLength) {
         php_shout_obj *intern;
 
         if (zend_parse_parameters_none() == FAILURE) {
@@ -594,52 +596,52 @@ static zend_object_value shout_object_new(zend_class_entry *class_type TSRMLS_DC
 
 static zend_function_entry shout_funcs[] = {
         PHP_ME(shout, __construct,      NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
-        PHP_ME(shout, get_version,      NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_errno,        NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_error,        NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getVersion,      NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getErrno,        NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getError,        NULL, ZEND_ACC_PUBLIC)
 
         PHP_ME(shout, open,             NULL, ZEND_ACC_PUBLIC)
         PHP_ME(shout, close,            NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_connected,    NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getConnected,    NULL, ZEND_ACC_PUBLIC)
         PHP_ME(shout, send,             NULL, ZEND_ACC_PUBLIC)
         PHP_ME(shout, sync,             NULL, ZEND_ACC_PUBLIC)
         PHP_ME(shout, delay,            NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_queue_length, NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getQueueLength, NULL, ZEND_ACC_PUBLIC)
 
-        PHP_ME(shout, get_host,         NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_host,         NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_protocol,     NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_protocol,     NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_port,         NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_port,         NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_password,     NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_password,     NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_mount,        NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_mount,        NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_name,         NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_name,         NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_url,          NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_url,          NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_genre,        NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_genre,        NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_agent,        NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_agent,        NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_user,         NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_user,         NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_description,  NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_description,  NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_dumpfile,     NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_dumpfile,     NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_public,       NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_public,       NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_format,       NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_format,       NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_nonblocking,  NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_nonblocking,  NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getHost,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setHost,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getProtocol,     NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setProtocol,     NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getPort,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setPort,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getPassword,     NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setPassword,     NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getMount,        NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setMount,        NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getName,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setName,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getUrl,          NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setUrl,          NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getGenre,        NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setGenre,        NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getAgent,        NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setAgent,        NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getUser,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setUser,         NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getDescription,  NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setDescription,  NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getDumpfile,     NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setDumpfile,     NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getPublic,       NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setPublic,       NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getFormat,       NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setFormat,       NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getNonblocking,  NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setNonblocking,  NULL, ZEND_ACC_PUBLIC)
 
-        PHP_ME(shout, set_audio_info,  NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, get_audio_info,  NULL, ZEND_ACC_PUBLIC)
-        PHP_ME(shout, set_metadata,    NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setAudioInfo,  NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, getAudioInfo,  NULL, ZEND_ACC_PUBLIC)
+        PHP_ME(shout, setMetadata,    NULL, ZEND_ACC_PUBLIC)
 
 	/* End of functions */
 	{NULL, NULL, NULL}

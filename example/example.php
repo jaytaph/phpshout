@@ -7,32 +7,32 @@
 $shout = new Shout();
 
 // Protocol information where to connect to
-$shout->set_protocol(shout::PROTOCOL_HTTP);
-$shout->set_host("localhost");
-$shout->set_port("8000");
-$shout->set_mount("/listen");
+$shout->setProtocol(shout::PROTOCOL_HTTP);
+$shout->setHost("localhost");
+$shout->setPort("8000");
+$shout->setMount("/listen");
 
 // Authentication
-$shout->set_user("source");
-$shout->set_password("secret");
+$shout->setUser("source");
+$shout->setPassword("blaataap");
 
 // Stream type
-$shout->set_format(shout::FORMAT_MP3);
+$shout->setFormat(shout::FORMAT_MP3);
 
 // Stream detail information
-$shout->set_name("My super awesome music stream");
-$shout->set_url("http://www.adayinthelifeof.nl");
-$shout->set_description("A description of the stream");
+$shout->setName("My super awesome music stream");
+$shout->setUrl("http://www.adayinthelifeof.nl");
+$shout->setDescription("A description of the stream");
 
 // Additional audio information
-$shout->set_audio_info($shout::AI_BITRATE, 320);
-$shout->set_audio_info($shout::AI_SAMPLERATE, 44100);
-$shout->set_audio_info($shout::AI_CHANNELS, 2);
+$shout->setAudioInfo($shout::AI_BITRATE, 320);
+$shout->setAudioInfo($shout::AI_SAMPLERATE, 44100);
+$shout->setAudioInfo($shout::AI_CHANNELS, 2);
 
 
 // Open the stream
 if ($shout->open() != shout::ERR_SUCCESS) {
-  die ("Cannot open stream to server: ".$shout->get_error()."\n");
+  die ("Cannot open stream to server: ".$shout->getError()."\n");
 }
 
 // Open MP3 file to stream
@@ -43,10 +43,10 @@ if ($f == null) {
 
 // Set the author and song title like: "<artist> - <title>"
 $meta = array("song" => "The Artist - A title - An Album");
-$shout->set_metadata($meta);
+$shout->setMetadata($meta);
 
 // Repeat until the end of file, or until the stream has closed
-while (!feof($f) && $shout->get_connected() == shout::ERR_CONNECTED) {
+while (!feof($f) && $shout->getConnected() == shout::ERR_CONNECTED) {
   print ".";
 
   // Read data from file

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
- <name>shout3</name>
+ <name>shout</name>
  <channel>pecl.php.net</channel>
  <summary>A shout3 extension</summary>
  <description>Provides a set of classes and functions for connectivity to a shout/icecast server.</description>
@@ -13,8 +13,8 @@
  <date>2012-03-22</date>
  <time>21:18:30</time>
  <version>
-  <release>0.0.1</release>
-  <api>0.0.1</api>
+  <release>0.0.2</release>
+  <api>0.0.2</api>
  </version>
  <stability>
   <release>beta</release>
@@ -25,8 +25,9 @@
  </notes>
  <contents>
   <dir name="/">
-   <file md5sum="04128396a83eb1c0264d2889978b88e7" name="config.m4" role="src" />
-   ....
+   <file name="config.m4" role="src" />
+   <file name="php_shout.h" role="src" />
+   <file name="shout.c" role="src" />
   </dir>
  </contents>
  <dependencies>
@@ -39,7 +40,7 @@
    </pearinstaller>
   </required>
  </dependencies>
- <providesextension>shout3</providesextension>
+ <providesextension>shout</providesextension>
  <extsrcrelease>
   <configureoption default="autodetect" name="with-shout3" prompt="libshout3 prefix?" />
  </extsrcrelease>
